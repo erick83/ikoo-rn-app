@@ -10,18 +10,35 @@ import styles from './styles'
 import colors from '../../global-styles/colors'
 import DebitP2P from '../../screens/debit-p2p/debit-p2p'
 import DebitP2pConfirm from '../../screens/debit-p2p-confirm/debit-p2p-confirm'
+import { useDispatch } from 'react-redux'
+import { logout, logoutRequest } from '../../redux/auth/actions'
 
 const Drawer = createDrawerNavigator();
 
 const IkooDrawer: React.FC = () => {
+  const dispatch = useDispatch()
+
+  function logOut() {
+    dispatch(logoutRequest())
+  }
+
   const HeaderRight = () => {
 		return (
-			<Icon
-				name="notifications-none"
-				type="material-comunity"
-				color={colors.white}
-        style={{ marginRight: 8 }}
-			/>
+      <View style={styles.rightButtonContainer}>
+        <Icon
+          name="notifications-none"
+          type="material-comunity"
+          color={colors.white}
+          style={{ marginRight: 8 }}
+        />
+        <Icon
+          name="logout"
+          type="material-comunity"
+          color={colors.white}
+          style={{ marginRight: 8 }}
+          onPress={logOut}
+        />
+      </View>
 		)
 	}
 
@@ -36,7 +53,7 @@ const IkooDrawer: React.FC = () => {
 	}
 
   return (
-    <Drawer.Navigator drawerContent={(props) => <Menu {...props} />}>
+    <Drawer.Navigator drawerContent={(props) => <Menu {...props} logOut={logOut} />}>
       <Drawer.Screen
         name="Home"
         component={Home}
@@ -69,8 +86,8 @@ const IkooDrawer: React.FC = () => {
   );
 }
 
-const Menu = (props: DrawerContentComponentProps) => {
-  const { navigation } = props
+const Menu = (props: any) => {
+  const { navigation, logOut } = props
   return (
     <View style={styles.menuContainer}>
       <Button
@@ -137,6 +154,23 @@ const Menu = (props: DrawerContentComponentProps) => {
         containerStyle={styles.buttonsContainer}
         buttonStyle={styles.buttonMinus}
         /> */}
+
+      <Button
+        title="Cerrar Sesión"
+        raised
+        containerStyle={styles.logoutButtonContainer}
+        buttonStyle={styles.buttonLogout}
+        onPress={logOut}
+        icon={
+          <Icon
+            name="logout"
+            type="material-comunity"
+            size={18}
+            color="white"
+            style={styles.buttonIcon}
+          />
+        }
+        />
     </View>
   )
 }

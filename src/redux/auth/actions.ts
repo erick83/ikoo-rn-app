@@ -31,7 +31,7 @@ export const login = (payload: ILogin) => ({
 })
 
 export const logoutRequest = () => ({
-	type: LOGOUT,
+	type: LOGOUT_REQUEST,
 })
 
 export const logout = () => ({

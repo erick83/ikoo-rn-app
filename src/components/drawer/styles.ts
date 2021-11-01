@@ -45,4 +45,21 @@ export default StyleSheet.create({
   buttonIcon: {
     paddingRight: 6,
   },
+
+  rightButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginRight: 10,
+  },
+
+  logoutButtonContainer: {
+    marginTop: 40,
+    alignSelf: 'flex-end'
+  },
+
+  buttonLogout: {
+    backgroundColor: colors.darkgray,
+    color: colors.white,
+  },
+
 })
